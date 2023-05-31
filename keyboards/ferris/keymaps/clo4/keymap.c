@@ -45,9 +45,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NUM] = LAYOUT(
-    MO(_RES), KC_NO,   KC_NO,   KC_NO,   KC_NO,    /**/  KC_PEQL, KC_P7, KC_P8, KC_P9, KC_PPLS,
-    KC_LALT,  KC_LGUI, KC_LSFT, KC_LCTL, KC_RALT,  /**/  KC_PAST, KC_P4, KC_P5, KC_P6, KC_PMNS,
-    KC_NO,    KC_APP,  KC_TAB,  KC_BSPC, KC_ENT,   /**/  KC_P0,   KC_P1, KC_P2, KC_P3, KC_PSLS,
+    MO(_RES), KC_NO,   KC_NO,   KC_NO,   KC_NO,    /**/  KC_PEQL, KC_7,  KC_8, KC_9, KC_PPLS,
+    KC_LALT,  KC_LGUI, KC_LSFT, KC_LCTL, KC_RALT,  /**/  KC_PAST, KC_4,  KC_5, KC_6, KC_PMNS,
+    KC_NO,    KC_APP,  KC_TAB,  KC_BSPC, KC_ENT,   /**/  KC_0,    KC_1,  KC_2, KC_3, KC_PSLS,
                                 KC_NO,   KC_TRNS,  /**/  KC_NO,   KC_NO
   ),
 
