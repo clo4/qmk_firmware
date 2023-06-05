@@ -32,7 +32,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // The default is 40
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 100
 
-// Pick good defaults for enabling homerow modifiers
-#define TAPPING_TERM 200
+// Don't need home-row mods for this layout.
+// Because I use OSM mods the tapping term needs to be lower so they can be used with
+// mouse clicks for things like resizing windows and ctrl-clicking links.
+#define TAPPING_TERM 100
 #define PERMISSIVE_HOLD
 #define QUICK_TAP_TERM 0
