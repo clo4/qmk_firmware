@@ -42,13 +42,13 @@ enum layers {
 // - Use XXXXXXX and _______ instead of the corresponding KC_*
 
 // To align by cols, type this sequence when your cursor is over the { below
-// mi{sLAY<enter>j3xS,_<A-;>&
+// mi{sLAY<enter>j3xS,<ret>_<A-;>&
 // Broken down:
 // - mi{ selects inside the array
 // - sLAY<ret> selects the LAYOUT macros (we don't need the entire macro, just a cursor on it)
 // - j moves the cursor down into the LAYOUT parentheses
 // - 3x selects 3 lines
-// - S, splits by commas, so now you have a selection for each item
+// - S,<ret> splits by commas, so now you have a selection for each item
 // - _ trims any whitespace from the selections
 // - <A-;> swaps the selection head and anchor, so the alignment will happen on the left
 // - & aligns the selections to columns
