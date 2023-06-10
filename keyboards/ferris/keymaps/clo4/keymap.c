@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //  = 7 8 9 +
   //  * 4 5 6 -
   //  0 1 2 3 /
-  // Custom: KC_DOT in bottom left
+  // Custom: KC_DOT on bottom left
   [_NUM] = LAYOUT(
     MO(_RES), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  KC_PEQL, KC_7,    KC_8,    KC_9,    KC_PPLS,
     KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_RALT,  /**/  KC_PAST, KC_4,    KC_5,    KC_6,    KC_PMNS,
@@ -117,4 +117,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
   }
   return true;
+}
+
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+  // The example in the documentation was exactly what I wanted to add
+  bool shifted = (mods & MOD_MASK_SHIFT);
+  switch (keycode) {
+    case KC_TAB:
+      if (shifted) {
+        return KC_TAB;
+      } else {
+        return S(KC_TAB);
+      }
+  }
+  return KC_TRNS;
 }
