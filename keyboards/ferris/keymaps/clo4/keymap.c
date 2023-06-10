@@ -1,3 +1,10 @@
+#include <stdint.h>
+#include "action.h"
+#include "action_util.h"
+#include "modifiers.h"
+#include "mousekey.h"
+#include "quantum.h"
+#include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 
 enum layers {
@@ -20,11 +27,6 @@ enum layers {
 #define KC_LCTC LCTL(KC_C)
 #define KC_LCTV LCTL(KC_V)
 #define KC_LCTB LCTL(KC_B)
-
-enum custom_keycodes {
-  /* Types ` = ` when pressed. This requires some hand-gymnastics without it. */
-  STR_EQL = SAFE_RANGE,
-};
 
 // This layout is based on Seniply:
 // https://stevep99.github.io/seniply/
@@ -80,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_SYM] = LAYOUT(
     KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  /**/  KC_EQL,  KC_GRV,  KC_COLN, KC_SCLN, KC_PLUS,
     KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_CIRC,  /**/  KC_ASTR, KC_LPRN, KC_LCBR, KC_LBRC, KC_MINS,
-    STR_EQL,  XXXXXXX,  KC_BSLS,  KC_PIPE,  KC_AMPR,  /**/  KC_TILD, KC_RPRN, KC_RCBR, KC_RBRC, KC_UNDS,
+    XXXXXXX,  XXXXXXX,  KC_BSLS,  KC_PIPE,  KC_AMPR,  /**/  KC_TILD, KC_RPRN, KC_RCBR, KC_RBRC, KC_UNDS,
                                   MO(_NUM), KC_SPC,   /**/  XXXXXXX, _______
   ),
   [_FUN] = LAYOUT(
@@ -95,9 +97,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //  0 1 2 3 /
   // Custom: KC_DOT on bottom left
   [_NUM] = LAYOUT(
-    MO(_RES), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  KC_PEQL, KC_7,    KC_8,    KC_9,    KC_PPLS,
-    KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_RALT,  /**/  KC_PAST, KC_4,    KC_5,    KC_6,    KC_PMNS,
-    KC_DOT,   KC_APP,   KC_TAB,   KC_BSPC,  KC_ENT,   /**/  KC_0,    KC_1,    KC_2,    KC_3,    KC_PSLS,
+    MO(_RES), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  KC_EQL,  KC_7,    KC_8,    KC_9,    KC_PLUS,
+    KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_RALT,  /**/  KC_ASTR, KC_4,    KC_5,    KC_6,    KC_MINS,
+    KC_DOT,   KC_APP,   KC_TAB,   KC_BSPC,  KC_ENT,   /**/  KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH,
                                   _______,  XXXXXXX,  /**/  KC_SPC,  _______
   ),
   [_RES] = LAYOUT(
@@ -108,19 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case STR_EQL:
-      if (record->event.pressed) {
-        SEND_STRING(" = ");
-        return false;
-      }
-  }
-  return true;
-}
-
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
-  // The example in the documentation was exactly what I wanted to add
   bool shifted = (mods & MOD_MASK_SHIFT);
   switch (keycode) {
     case KC_TAB:
