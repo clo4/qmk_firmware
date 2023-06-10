@@ -1,10 +1,3 @@
-#include <stdint.h>
-#include "action.h"
-#include "action_util.h"
-#include "modifiers.h"
-#include "mousekey.h"
-#include "quantum.h"
-#include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 
 enum layers {
@@ -28,11 +21,17 @@ enum layers {
 #define KC_LCTV LCTL(KC_V)
 #define KC_LCTB LCTL(KC_B)
 
+enum custom_keycodes {
+  /* Sends the string ` = ` */
+  STR_EQ1 = SAFE_RANGE,
+  /* Sends the string ` == ` */
+  STR_EQ2,
+  /* Sends the string ` === ` */
+  STR_EQ3,
+};
+
 // This layout is based on Seniply:
 // https://stevep99.github.io/seniply/
-//
-// Seniply is a well-designed layout that pairs extremely well with Colemak-DH.
-// It was created by the same person that created Colemak-DH.
 //
 // The only major change from the stock layout is how the layers are ordered.
 // There are 4 thumb keys on the Ferris Sweep: A, B # C, D (where # is the split)
@@ -83,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  /**/  KC_EQL,  KC_GRV,  KC_COLN, KC_SCLN, KC_PLUS,
     KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_CIRC,  /**/  KC_ASTR, KC_LPRN, KC_LCBR, KC_LBRC, KC_MINS,
     XXXXXXX,  XXXXXXX,  KC_BSLS,  KC_PIPE,  KC_AMPR,  /**/  KC_TILD, KC_RPRN, KC_RCBR, KC_RBRC, KC_UNDS,
-                                  MO(_NUM), KC_SPC,   /**/  XXXXXXX, _______
+                                  MO(_NUM), KC_SPC,   /**/  STR_EQ1, _______
   ),
   [_FUN] = LAYOUT(
     KC_MSTP,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_BRIU,  /**/  KC_F12,  KC_F7,   KC_F8,   KC_F9,   XXXXXXX,
@@ -97,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //  0 1 2 3 /
   // Custom: KC_DOT on bottom left
   [_NUM] = LAYOUT(
-    MO(_RES), XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  /**/  KC_EQL,  KC_7,    KC_8,    KC_9,    KC_PLUS,
+    MO(_RES), STR_EQ1,  STR_EQ2,  STR_EQ3,  XXXXXXX,  /**/  KC_EQL,  KC_7,    KC_8,    KC_9,    KC_PLUS,
     KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_RALT,  /**/  KC_ASTR, KC_4,    KC_5,    KC_6,    KC_MINS,
     KC_DOT,   KC_APP,   KC_TAB,   KC_BSPC,  KC_ENT,   /**/  KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH,
                                   _______,  XXXXXXX,  /**/  KC_SPC,  _______
@@ -109,6 +108,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   XXXXXXX,  XXXXXXX,  /**/  XXXXXXX, XXXXXXX 
   ),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch (keycode) {
+      case STR_EQ1:
+        SEND_STRING(" = ");
+        return false;
+
+      case STR_EQ2:
+        SEND_STRING(" == ");
+        return false;
+
+      case STR_EQ3:
+        SEND_STRING(" === ");
+        return false;
+    }
+  }
+  return true;
+}
 
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   bool shifted = (mods & MOD_MASK_SHIFT);
