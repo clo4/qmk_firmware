@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //  0 1 2 3 /
   // Custom: KC_DOT on bottom left
   [_NUM] = LAYOUT(
-    MO(_RES), STR_EQ1,  STR_EQ2,  STR_EQ3,  XXXXXXX,  /**/  KC_EQL,  KC_7,    KC_8,    KC_9,    KC_PLUS,
+    MO(_RES), STR_EQ3,  STR_EQ1,  STR_EQ2,  XXXXXXX,  /**/  KC_EQL,  KC_7,    KC_8,    KC_9,    KC_PLUS,
     KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_RALT,  /**/  KC_ASTR, KC_4,    KC_5,    KC_6,    KC_MINS,
     KC_DOT,   KC_APP,   KC_TAB,   KC_BSPC,  KC_ENT,   /**/  KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH,
                                   _______,  XXXXXXX,  /**/  KC_SPC,  _______
