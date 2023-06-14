@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK_DH] = LAYOUT(
     KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     /**/  KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT,
     KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     /**/  KC_M,    KC_N,    KC_E,    KC_I,    KC_O,
-    KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,     /**/  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH,
+    KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,     /**/  KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_MINS,
                                   MO(_EXT), KC_SPC,   /**/  KC_LSFT, MO(_SYM)
   ),
   // I've added a key for C-b to make tmux easier to use.
@@ -80,8 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Custom: STR_EQL in bottom left, KC_SPC on left thumb
   [_SYM] = LAYOUT(
     KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  /**/  KC_EQL,  KC_GRV,  KC_COLN, KC_SCLN, KC_PLUS,
-    KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_CIRC,  /**/  KC_ASTR, KC_LPRN, KC_LCBR, KC_LBRC, KC_MINS,
-    XXXXXXX,  XXXXXXX,  KC_BSLS,  KC_PIPE,  KC_AMPR,  /**/  KC_TILD, KC_RPRN, KC_RCBR, KC_RBRC, KC_UNDS,
+    KC_LCTL,  KC_LALT,  KC_LSFT,  KC_LGUI,  KC_CIRC,  /**/  KC_ASTR, KC_LPRN, KC_LCBR, KC_LBRC, KC_SLSH,
+    XXXXXXX,  XXXXXXX,  KC_BSLS,  KC_PIPE,  KC_AMPR,  /**/  KC_TILD, KC_RPRN, KC_RCBR, KC_RBRC, KC_QUES,
                                   MO(_NUM), KC_SPC,   /**/  STR_EQ1, _______
   ),
   [_FUN] = LAYOUT(
